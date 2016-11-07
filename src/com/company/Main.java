@@ -22,36 +22,43 @@ class testing {
         {
             int k = in.nextInt();
 
-            ArrayList<String> listMax = new ArrayList<>();
-            ArrayList<String> listMin = new ArrayList<>();
-            String max = null;
-            String min = null;
+            String max = "";
+            String min = "";
+
             if (S.length() >= 2 && k > 0 && k < S.length() - k && k < S.length()/2 && S.length()<1000) {
                 for (int i = 0; i < S.length() - k; i++) {
 
                     String firstSub = S.substring(i, i + k);
                     String secondSub = S.substring(i + 1, k + i + 1);
+
+                    String tempMax;
+                    String tempMin;
+
                     if (firstSub.compareTo(secondSub) > 0) {
-                        max = firstSub;
-                        min = secondSub;
-
-                    } else if (firstSub.compareTo(secondSub) < 0) {
-                        min = firstSub;
-                        max = secondSub;
-                    } else if (firstSub.compareTo(secondSub) == 0) {
-                        min = firstSub;
-                        max = secondSub;
+                        tempMax = firstSub;
+                        tempMin = secondSub;
+                        if (i==0) {
+                            min = secondSub;
+                            max = firstSub;
+                        }
+                    } else {
+                        tempMin = firstSub;
+                        tempMax = secondSub;
+                        if (i==0) {
+                            min = firstSub;
+                            max = secondSub;
+                        }
                     }
-                    listMax.add(i, max);
-                    listMin.add(i, min);
+
+                    if(tempMax.compareTo(max) > 0)
+                        max = tempMax;
+                    if(tempMin.compareTo(min) < 0)
+                        min = tempMin;
                 }
-                Collections.sort(listMin);
-                System.out.println(listMin.get(0));
 
-                Collections.sort(listMax);
-                System.out.println(listMax.get(listMax.size() - 1));
+                System.out.println(min);
+                System.out.println(max);
             }
-
            else System.out.print(S+"\n"+S+"\n");
 
         }
